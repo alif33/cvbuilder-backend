@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require("cors");
 const puppeteer = require('puppeteer');
+const CV = require("../cv");
 const app = express();
 
 app.use(cors());
@@ -11,8 +12,7 @@ app.get("/", (req, res)=>{
 })
 
 app.get('/pdf', async (req, res) => {
-  const { html, name } = req.body;
-  console.log(req.body)
+  
   try {
     const browser = await puppeteer.launch({ headless: 'new' });
     const page = await browser.newPage();
@@ -23,7 +23,7 @@ app.get('/pdf', async (req, res) => {
         deviceScaleFactor: 2
     });
 
-    await page.setContent(name);
+    await page.setContent(CV);
     const pdfBuffer = await page.pdf({
         format: 'A4',
         printBackground: true, 
@@ -40,7 +40,7 @@ app.get('/pdf', async (req, res) => {
   }
 });
 
-const port = 3000;
+const port = 4000;
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
