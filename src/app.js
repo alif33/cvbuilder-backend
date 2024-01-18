@@ -16,7 +16,7 @@ app.get("/", (req, res)=>{
 app.get('/pdf', async (req, res) => {
   
   try {
-    const browser = await puppeteer.launch({ headless: 'new' });
+    const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
 
     await page.setViewport({
