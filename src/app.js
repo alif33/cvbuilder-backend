@@ -8,7 +8,9 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res)=>{
-  console.log(req.body)
+  res.json({
+    message: "Access denied"
+  })
 })
 
 app.get('/pdf', async (req, res) => {
